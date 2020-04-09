@@ -4,12 +4,11 @@ import { inject, observer } from "mobx-react";
 const Computer = ({ computerChoice }) => {
   return (
     <div>
-      <div>Computer Container</div>
       <div>{computerChoice}</div>
     </div>
   );
 };
 
 export default inject(({ rps }) => ({
-  computerChoice: rps.computerChoice,
+  computerChoice: rps.computer,
 }))(observer(Computer));

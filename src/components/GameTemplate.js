@@ -7,16 +7,6 @@ const AllContainer = styled.div`
   align-items: center;
 `;
 
-const StartButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 100px;
-  margin-top: 20px;
-  background-color: orange;
-`;
-
 const ButtonBox = styled.div`
   display: flex;
   justify-content: center;
@@ -24,7 +14,6 @@ const ButtonBox = styled.div`
   width: 300px;
   height: 60px;
   margin-top: 10px;
-  background-color: yellow;
 `;
 
 const RestartButton = styled.a`
@@ -33,44 +22,22 @@ const RestartButton = styled.a`
   align-items: center;
   width: 100px;
   height: 60px;
-  background-color: lightcoral;
-  margin-right: 60px;
   text-decoration: none;
-`;
-
-const StopButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 60px;
-  background-color: lightcyan;
 `;
 
 const TimerBox = styled.div`
   position: absolute;
-  top: 100px;
-  left: 100px;
+  top: 50px;
+  left: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 150px;
   height: 150px;
   margin-top: 20px;
-  background-color: pink;
-`;
-
-const GameSetContainer = styled.div`
-  position: absolute;
-  top: 100px;
-  right: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 150px;
-  margin-top: 20px;
-  background-color: coral;
+  color: pink;
+  font-size: 45px;
+  font-weight: bold;
 `;
 
 const GameContainer = styled.div`
@@ -79,7 +46,6 @@ const GameContainer = styled.div`
   width: 100vw;
   height: 60vh;
   margin-top: 20px;
-  background-color: purple;
 `;
 
 const PlayerBox = styled.div`
@@ -90,7 +56,7 @@ const PlayerBox = styled.div`
   height: 450px;
   margin-top: 25px;
   margin-left: 25px;
-  background-color: green;
+  background-color: #54a0ff;
 `;
 
 const ComputerBox = styled.div`
@@ -101,7 +67,7 @@ const ComputerBox = styled.div`
   height: 450px;
   margin-top: 25px;
   margin-right: 25px;
-  background-color: yellow;
+  background-color: #feca57;
 `;
 const ScoreBox = styled.div`
   display: flex;
@@ -110,19 +76,15 @@ const ScoreBox = styled.div`
   width: 800px;
   height: 450px;
   margin-top: 25px;
-  background-color: blue;
 `;
 
 const GameTemplate = ({ player, computer, counter, score }) => {
   return (
     <AllContainer>
       <TimerBox>{counter}</TimerBox>
-      <StartButton>START</StartButton>
       <ButtonBox>
         <RestartButton href="/">Restart</RestartButton>
-        <StopButton>Stop</StopButton>
       </ButtonBox>
-      <GameSetContainer />
       <GameContainer>
         <PlayerBox>{player}</PlayerBox>
         <ScoreBox>{score}</ScoreBox>

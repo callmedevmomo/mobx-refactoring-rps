@@ -26,16 +26,16 @@ const Player = ({
   gameStarted,
   playerStart,
   userChoice,
-  playerChoice,
   hands,
   handleScore,
+  count,
 }) => {
   function handleView(event) {
     const {
       target: { value: user },
     } = event;
-    handleScore();
-    return userChoice(user);
+    userChoice(user, count);
+    return handleScore(count);
   }
   return (
     <PlayerBox>
@@ -68,7 +68,6 @@ const Player = ({
               </Test>
             );
           })}
-          <div>{playerChoice}</div>
         </>
       ) : (
         <ButtonBox onClick={playerStart}>Start</ButtonBox>
@@ -81,7 +80,7 @@ export default inject(({ rps, game }) => ({
   gameStarted: rps.gameStarted,
   playerStart: rps.playerStart,
   userChoice: rps.userChoice,
-  playerChoice: rps.choice,
   hands: rps.hands,
   handleScore: game.handleScore,
+  count: rps.counter,
 }))(observer(Player));

@@ -3,45 +3,54 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 const FinishedBox = styled.div``;
-const FinishInfo = styled.div``;
 
-const ScoreBox = styled.div``;
+const FlexBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+`;
 
-const Score = ({ allGameFinished, userChoice, computerChoice, getScore }) => {
+const FlexScoreBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const RoundBox = styled.div`
+  width: 100px;
+  margin-left: 30px;
+`;
+
+const Score = ({ allGameFinished, currentRound, gameScore }) => {
   return (
     <div>
       {allGameFinished ? (
         <>
-          {allGameFinished.map((item) => {
-            return (
-              <FinishedBox key={item}>
-                <FinishInfo key={item.playerWin}>
-                  Player Win : {item.playerWin}
-                </FinishInfo>
-                <FinishInfo key={item.computerWin}>
-                  Computer Win : {item.computerWin}
-                </FinishInfo>
-                <FinishInfo key={item.draw}>Draw Game : {item.draw}</FinishInfo>
-              </FinishedBox>
-            );
+          {gameScore.map((item) => {
+            return <FinishedBox key={item}>{item.gameScore}</FinishedBox>;
           })}
         </>
       ) : (
-        <ScoreBox>
-          <div>
-            <div>{userChoice}</div>
-            <div>{computerChoice}</div>
-            <div>{getScore}</div>
-          </div>
-        </ScoreBox>
+        <FlexScoreBox>
+          {currentRound.map((item) => {
+            return (
+              <FlexBox key={item}>
+                <RoundBox key={item.player}>{item.player}</RoundBox>
+                <RoundBox key={item.winner || item.isDraw}>
+                  {item.winner ? item.winner : "draw"}
+                </RoundBox>
+                <RoundBox key={item.computer}>{item.computer}</RoundBox>
+              </FlexBox>
+            );
+          })}
+        </FlexScoreBox>
       )}
     </div>
   );
 };
 
-export default inject(({ rps, game }) => ({
-  userChoice: rps.choice,
-  computerChoice: rps.computer,
-  getScore: game.Scores,
+export default inject(({ game }) => ({
+  currentRound: game.currentRound,
   allGameFinished: game.allGameFinished,
+  gameScore: game.gameScore,
 }))(observer(Score));
