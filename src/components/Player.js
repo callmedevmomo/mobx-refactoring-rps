@@ -35,40 +35,34 @@ const Player = ({
       target: { value: user },
     } = event;
     userChoice(user, count);
-    return handleScore(count);
+    handleScore(count);
   }
   return (
     <PlayerBox>
       {gameStarted ? (
-        <>
-          {hands.map((hand) => {
-            return (
-              <Test key={hand}>
-                <ButtonBox
-                  onClick={handleView}
-                  key={hand.rock}
-                  value={hand.rock}
-                >
-                  {hand.rock}
-                </ButtonBox>
-                <ButtonBox
-                  onClick={handleView}
-                  key={hand.paper}
-                  value={hand.paper}
-                >
-                  {hand.paper}
-                </ButtonBox>
-                <ButtonBox
-                  onClick={handleView}
-                  key={hand.scissors}
-                  value={hand.scissors}
-                >
-                  {hand.scissors}
-                </ButtonBox>
-              </Test>
-            );
-          })}
-        </>
+        hands.map((hand) => {
+          return (
+            <Test key={hand}>
+              <ButtonBox onClick={handleView} key={hand.rock} value={hand.rock}>
+                {hand.rock}
+              </ButtonBox>
+              <ButtonBox
+                onClick={handleView}
+                key={hand.paper}
+                value={hand.paper}
+              >
+                {hand.paper}
+              </ButtonBox>
+              <ButtonBox
+                onClick={handleView}
+                key={hand.scissors}
+                value={hand.scissors}
+              >
+                {hand.scissors}
+              </ButtonBox>
+            </Test>
+          );
+        })
       ) : (
         <ButtonBox onClick={playerStart}>Start</ButtonBox>
       )}

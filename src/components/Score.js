@@ -35,11 +35,13 @@ const Score = ({ allGameFinished, currentRound, gameScore }) => {
           {currentRound.map((item) => {
             return (
               <FlexBox key={item}>
-                <RoundBox key={item.player}>{item.player}</RoundBox>
+                <RoundBox key={item.playerChoice}>{item.playerChoice}</RoundBox>
                 <RoundBox key={item.winner || item.isDraw}>
                   {item.winner ? item.winner : "draw"}
                 </RoundBox>
-                <RoundBox key={item.computer}>{item.computer}</RoundBox>
+                <RoundBox key={item.computerChoice}>
+                  {item.computerChoice}
+                </RoundBox>
               </FlexBox>
             );
           })}

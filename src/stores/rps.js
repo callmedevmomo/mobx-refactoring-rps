@@ -1,8 +1,8 @@
 import { observable, action } from "mobx";
 
 export default class RpsStore {
-  @observable player = "";
-  @observable computer = "";
+  @observable playerChoice = "";
+  @observable computerChoice = "";
   @observable counter = 10;
   @observable gameStarted = false;
 
@@ -35,14 +35,14 @@ export default class RpsStore {
     const paper = this.hands.map((item) => item.paper)[handsLength];
     const scissors = this.hands.map((item) => item.scissors)[handsLength];
     if (user === rock) {
-      this.player = rock;
+      this.playerChoice = rock;
     } else if (user === paper) {
-      this.player = paper;
+      this.playerChoice = paper;
     } else {
-      this.player = scissors;
+      this.playerChoice = scissors;
     }
     let items = [rock, paper, scissors];
-    this.computer = items[Math.floor(Math.random() * items.length)];
+    this.computerChoice = items[Math.floor(Math.random() * items.length)];
     if (counter === 0) {
       this.playerStart();
     }

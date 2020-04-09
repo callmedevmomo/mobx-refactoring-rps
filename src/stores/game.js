@@ -20,22 +20,22 @@ export default class GameStore {
 
   @action handleScore = (counter) => {
     // 모든 게임 결과 round에 push
-    const { player, computer } = this.root.rps;
+    const { playerChoice, computerChoice, hands } = this.root.rps;
     const rsp = {
-      rock: { beats: ["scissors"] },
-      paper: { beats: ["rock"] },
-      scissors: { beats: ["paper"] },
+      rock: { beats: hands.map((item) => item.scissors) },
+      paper: { beats: hands.map((item) => item.rock) },
+      scissors: { beats: hands.map((item) => item.paper) },
     };
 
     const winnerObj = {
       winner: null,
-      player,
-      computer,
+      playerChoice,
+      computerChoice,
     };
     const isDrawObj = {
       isDraw: false,
-      player,
-      computer,
+      playerChoice,
+      computerChoice,
       counter,
     };
     const currentRoundCount = this.currentRound.length;
@@ -43,11 +43,11 @@ export default class GameStore {
       winnerObj.winner = "computer";
       this.round.push(winnerObj);
       this.currentRound.push(winnerObj);
-    } else if (player === computer) {
+    } else if (playerChoice === computerChoice) {
       isDrawObj.isDraw = true;
       this.round.push(isDrawObj);
       this.currentRound.push(isDrawObj);
-    } else if (rsp[player].beats.indexOf(computer) !== -1) {
+    } else if (rsp[playerChoice].beats.indexOf(computerChoice) !== -1) {
       winnerObj.winner = "player";
       this.round.push(winnerObj);
       this.currentRound.push(winnerObj);
@@ -107,6 +107,7 @@ export default class GameStore {
         gameFinishedObj.gameScore = "Draw the Game";
         this.gameScore.push(gameFinishedObj);
       }
+      console.log(this.set.map((item) => item.setWinner));
       this.allGameFinished = true;
     }
   };
