@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import propTypes from "prop-types";
 
 const AllContainer = styled.div`
   display: flex;
@@ -94,4 +95,10 @@ const GameTemplate = ({ player, computer, counter, score }) => {
   );
 };
 
+GameTemplate.propTypes = {
+  player: propTypes.object.isRequired,
+  computer: propTypes.object.isRequired,
+  counter: propTypes.object.isRequired,
+  score: propTypes.object.isRequired,
+};
 export default GameTemplate;

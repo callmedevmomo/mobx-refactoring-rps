@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+import propTypes from "prop-types";
 
 const FinishedBox = styled.div``;
 
@@ -51,6 +52,11 @@ const Score = ({ allGameFinished, currentRound, gameScore }) => {
   );
 };
 
+Score.propTypes = {
+  allGameFinished: propTypes.bool.isRequired,
+  currentRound: propTypes.array.isRequired,
+  gameScore: propTypes.array.isRequired,
+};
 export default inject(({ game }) => ({
   currentRound: game.currentRound,
   allGameFinished: game.allGameFinished,

@@ -50,3 +50,10 @@ Redux 혹은 Mobx, React 를 사용
 - [x] Shared 폴더 구조 다시 잡기
 - [x] PropTypes 정확하게 작성하기
 - [x] onClick arrow fn 수정하기
+
+### 추가
+
+- [x] PropTypes
+- [x] EventHandling
+- [x] Css Refactoring (canIuse && flexbugs)
+- [ ] arrowFn

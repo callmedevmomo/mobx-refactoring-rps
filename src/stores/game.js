@@ -18,7 +18,7 @@ export default class GameStore {
     this.root = root;
   }
 
-  @action handleScore = (counter) => {
+  @action calculateScore = (counter) => {
     // 모든 게임 결과 round에 push
     const { playerChoice, computerChoice, hands } = this.root.rps;
     const rsp = {

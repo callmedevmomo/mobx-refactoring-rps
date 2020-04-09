@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+import propTypes from "prop-types";
 
 const PlayerBox = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -12,11 +12,10 @@ const PlayerBox = styled.div`
 
 const ButtonBox = styled.button`
   height: 60px;
+  margin-top: 20px;
 `;
 
 const Test = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -27,15 +26,17 @@ const Player = ({
   playerStart,
   userChoice,
   hands,
-  handleScore,
+  calculateScore,
   count,
 }) => {
+  // event handling ==> onClick
+  // propTypes
   function handleView(event) {
     const {
       target: { value: user },
     } = event;
     userChoice(user, count);
-    handleScore(count);
+    calculateScore(count);
   }
   return (
     <PlayerBox>
@@ -70,11 +71,20 @@ const Player = ({
   );
 };
 
+Player.propTypes = {
+  gameStarted: propTypes.bool.isRequired,
+  playerStart: propTypes.func.isRequired,
+  userChoice: propTypes.func.isRequired,
+  hands: propTypes.array.isRequired,
+  calculateScore: propTypes.func.isRequired,
+  count: propTypes.number.isRequired,
+};
+
 export default inject(({ rps, game }) => ({
   gameStarted: rps.gameStarted,
   playerStart: rps.playerStart,
   userChoice: rps.userChoice,
   hands: rps.hands,
-  handleScore: game.handleScore,
+  calculateScore: game.calculateScore,
   count: rps.counter,
 }))(observer(Player));
