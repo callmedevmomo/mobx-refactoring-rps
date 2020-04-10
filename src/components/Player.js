@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import propTypes from "prop-types";
+import Counter from "./Counter";
 
 const PlayerBox = styled.div`
   width: 100%;
@@ -15,7 +16,7 @@ const ButtonBox = styled.button`
   margin-top: 20px;
 `;
 
-const Test = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -27,41 +28,23 @@ const Player = ({
   userChoice,
   hands,
   calculateScore,
-  count,
+  gameTime,
 }) => {
-  // event handling ==> onClick
-  // propTypes
-  function handleView(event) {
-    const {
-      target: { value: user },
-    } = event;
-    userChoice(user, count);
-    calculateScore(count);
+  function clickHandler(hand) {
+    userChoice(hand, gameTime);
+    calculateScore(gameTime);
   }
   return (
     <PlayerBox>
+      <Counter gameTime={gameTime} gameStrated={gameStarted} />
       {gameStarted ? (
-        hands.map((hand) => {
+        Object.values(hands).map((hand, index) => {
           return (
-            <Test key={hand}>
-              <ButtonBox onClick={handleView} key={hand.rock} value={hand.rock}>
-                {hand.rock}
+            <ButtonWrapper key={index}>
+              <ButtonBox onClick={() => clickHandler(hand)} value={hand}>
+                {hand}
               </ButtonBox>
-              <ButtonBox
-                onClick={handleView}
-                key={hand.paper}
-                value={hand.paper}
-              >
-                {hand.paper}
-              </ButtonBox>
-              <ButtonBox
-                onClick={handleView}
-                key={hand.scissors}
-                value={hand.scissors}
-              >
-                {hand.scissors}
-              </ButtonBox>
-            </Test>
+            </ButtonWrapper>
           );
         })
       ) : (
@@ -75,9 +58,9 @@ Player.propTypes = {
   gameStarted: propTypes.bool.isRequired,
   playerStart: propTypes.func.isRequired,
   userChoice: propTypes.func.isRequired,
-  hands: propTypes.array.isRequired,
+  hands: propTypes.object.isRequired,
   calculateScore: propTypes.func.isRequired,
-  count: propTypes.number.isRequired,
+  gameTime: propTypes.number.isRequired,
 };
 
 export default inject(({ rps, game }) => ({
@@ -86,5 +69,5 @@ export default inject(({ rps, game }) => ({
   userChoice: rps.userChoice,
   hands: rps.hands,
   calculateScore: game.calculateScore,
-  count: rps.counter,
+  gameTime: rps.gameTime,
 }))(observer(Player));

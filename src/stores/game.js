@@ -2,9 +2,9 @@ import { observable, action } from "mobx";
 
 export default class GameStore {
   // 모든 게임 결과
-  @observable round = [];
+  @observable rounds = [];
   // set 결과
-  @observable set = [];
+  @observable sets = [];
 
   // comp View 단에 띄울 1세트당 라운드 진행상황 &&  set 수 Count
   @observable currentRound = [];
@@ -22,9 +22,9 @@ export default class GameStore {
     // 모든 게임 결과 round에 push
     const { playerChoice, computerChoice, hands } = this.root.rps;
     const rsp = {
-      rock: { beats: hands.map((item) => item.scissors) },
-      paper: { beats: hands.map((item) => item.rock) },
-      scissors: { beats: hands.map((item) => item.paper) },
+      rock: { beats: hands.scissors },
+      paper: { beats: hands.rock },
+      scissors: { beats: hands.paper },
     };
 
     const winnerObj = {
@@ -41,19 +41,19 @@ export default class GameStore {
     const currentRoundCount = this.currentRound.length;
     if (counter === 0) {
       winnerObj.winner = "computer";
-      this.round.push(winnerObj);
+      this.rounds.push(winnerObj);
       this.currentRound.push(winnerObj);
     } else if (playerChoice === computerChoice) {
       isDrawObj.isDraw = true;
-      this.round.push(isDrawObj);
+      this.rounds.push(isDrawObj);
       this.currentRound.push(isDrawObj);
     } else if (rsp[playerChoice].beats.indexOf(computerChoice) !== -1) {
       winnerObj.winner = "player";
-      this.round.push(winnerObj);
+      this.rounds.push(winnerObj);
       this.currentRound.push(winnerObj);
     } else {
       winnerObj.winner = "computer";
-      this.round.push(winnerObj);
+      this.rounds.push(winnerObj);
       this.currentRound.push(winnerObj);
     }
 
@@ -74,21 +74,21 @@ export default class GameStore {
     if (currentRoundCount === 3) {
       if (currentWinCount > currentLoseCount) {
         setObj.setWinner = "player";
-        this.set.push(setObj);
+        this.sets.push(setObj);
       } else if (currentWinCount < currentLoseCount) {
         setObj.setWinner = "computer";
-        this.set.push(setObj);
+        this.sets.push(setObj);
       } else {
         setObj.setisDraw = true;
-        this.set.push(setObj);
+        this.sets.push(setObj);
       }
       this.currentRound = [];
     }
 
-    const setCount = this.set.length;
-    const setPlayerWin = this.set.filter((item) => item.setWinner === "player")
+    const setCount = this.sets.length;
+    const setPlayerWin = this.sets.filter((item) => item.setWinner === "player")
       .length;
-    const setComputerWin = this.set.filter(
+    const setComputerWin = this.sets.filter(
       (item) => item.setWinner === "computer"
     ).length;
     const gameFinishedObj = {
@@ -107,7 +107,6 @@ export default class GameStore {
         gameFinishedObj.gameScore = "Draw the Game";
         this.gameScore.push(gameFinishedObj);
       }
-      console.log(this.set.map((item) => item.setWinner));
       this.allGameFinished = true;
     }
   };

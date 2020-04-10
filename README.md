@@ -54,6 +54,6 @@ Redux 혹은 Mobx, React 를 사용
 ### 추가
 
 - [x] PropTypes
-- [x] EventHandling
-- [x] Css Refactoring (canIuse && flexbugs)
+- [ ] EventHandling
+- [ ] Css Refactoring (canIuse && flexbugs)
 - [ ] arrowFn

@@ -13,7 +13,7 @@ const Game = () => {
       <GameTemplate
         player={<Player />}
         computer={<Computer />}
-        counter={<Counter />}
+        gameTime={<Counter />}
         score={<Score />}
       />
     </div>

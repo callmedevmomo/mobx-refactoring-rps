@@ -1,16 +1,29 @@
 import React from "react";
-import { observer, inject } from "mobx-react";
 import propTypes from "prop-types";
+import styled from "styled-components";
 
-const Counter = ({ count, gameStrated }) => {
-  return gameStrated ? <div>{count}</div> : <></>;
+const TimerBox = styled.div`
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+  color: pink;
+  font-size: 45px;
+  font-weight: bold;
+`;
+
+const Counter = ({ gameTime, gameStrated }) => {
+  return gameStrated ? <TimerBox>{gameTime}</TimerBox> : <></>;
 };
 
 Counter.propTypes = {
-  count: propTypes.number.isRequired,
+  gameTime: propTypes.number,
   gameStarted: propTypes.bool,
 };
-export default inject(({ rps }) => ({
-  count: rps.counter,
-  gameStrated: rps.gameStarted,
-}))(observer(Counter));
+
+export default Counter;

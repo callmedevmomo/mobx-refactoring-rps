@@ -26,21 +26,6 @@ const RestartButton = styled.a`
   text-decoration: none;
 `;
 
-const TimerBox = styled.div`
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 150px;
-  height: 150px;
-  margin-top: 20px;
-  color: pink;
-  font-size: 45px;
-  font-weight: bold;
-`;
-
 const GameContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -79,10 +64,9 @@ const ScoreBox = styled.div`
   margin-top: 25px;
 `;
 
-const GameTemplate = ({ player, computer, counter, score }) => {
+const GameTemplate = ({ player, computer, score }) => {
   return (
     <AllContainer>
-      <TimerBox>{counter}</TimerBox>
       <ButtonBox>
         <RestartButton href="/">Restart</RestartButton>
       </ButtonBox>
@@ -98,7 +82,6 @@ const GameTemplate = ({ player, computer, counter, score }) => {
 GameTemplate.propTypes = {
   player: propTypes.object.isRequired,
   computer: propTypes.object.isRequired,
-  counter: propTypes.object.isRequired,
   score: propTypes.object.isRequired,
 };
 export default GameTemplate;

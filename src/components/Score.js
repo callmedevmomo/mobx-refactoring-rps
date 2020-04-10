@@ -26,23 +26,21 @@ const Score = ({ allGameFinished, currentRound, gameScore }) => {
   return (
     <div>
       {allGameFinished ? (
-        <>
-          {gameScore.map((item) => {
-            return <FinishedBox key={item}>{item.gameScore}</FinishedBox>;
-          })}
-        </>
+        gameScore.map((item, index) => {
+          return (
+            <FlexBox key={index}>
+              <FinishedBox>{item.gameScore}</FinishedBox>
+            </FlexBox>
+          );
+        })
       ) : (
         <FlexScoreBox>
-          {currentRound.map((item) => {
+          {currentRound.map((item, index) => {
             return (
-              <FlexBox key={item}>
-                <RoundBox key={item.playerChoice}>{item.playerChoice}</RoundBox>
-                <RoundBox key={item.winner || item.isDraw}>
-                  {item.winner ? item.winner : "draw"}
-                </RoundBox>
-                <RoundBox key={item.computerChoice}>
-                  {item.computerChoice}
-                </RoundBox>
+              <FlexBox key={index}>
+                <RoundBox>{item.playerChoice}</RoundBox>
+                <RoundBox>{item.winner ? item.winner : "draw"}</RoundBox>
+                <RoundBox>{item.computerChoice}</RoundBox>
               </FlexBox>
             );
           })}

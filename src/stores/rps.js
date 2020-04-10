@@ -3,37 +3,30 @@ import { observable, action } from "mobx";
 export default class RpsStore {
   @observable playerChoice = "";
   @observable computerChoice = "";
-  @observable counter = 10;
+  @observable gameTime = 10;
   @observable gameStarted = false;
 
-  hands = [
-    {
-      rock: "rock",
-      paper: "paper",
-      scissors: "scissors",
-    },
-  ];
+  hands = { rock: "rock", scissors: "scissors", paper: "paper" };
 
   constructor(root) {
     this.root = root;
   }
 
   @action playerStart = () => {
-    this.counter = 10;
+    this.gameTime = 10;
     this.gameStarted = true;
     const timeSet = setInterval(() => {
-      if (this.counter === 1) {
+      if (this.gameTime === 1) {
         clearInterval(timeSet);
       }
-      return (this.counter -= 1);
+      return (this.gameTime -= 1);
     }, 1000);
   };
 
   @action userChoice = (user, counter) => {
-    const handsLength = this.hands.length - 1;
-    const rock = this.hands.map((item) => item.rock)[handsLength];
-    const paper = this.hands.map((item) => item.paper)[handsLength];
-    const scissors = this.hands.map((item) => item.scissors)[handsLength];
+    const rock = this.hands.rock;
+    const paper = this.hands.paper;
+    const scissors = this.hands.scissors;
     if (user === rock) {
       this.playerChoice = rock;
     } else if (user === paper) {
@@ -41,13 +34,13 @@ export default class RpsStore {
     } else {
       this.playerChoice = scissors;
     }
-    let items = [rock, paper, scissors];
+    let items = Object.values(this.hands);
     this.computerChoice = items[Math.floor(Math.random() * items.length)];
     if (counter === 0) {
       this.playerStart();
     }
     if (counter !== 0) {
-      this.counter = 10;
+      this.gameTime = 10;
     }
   };
 }
