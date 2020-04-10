@@ -41,9 +41,7 @@ const Player = ({
         Object.values(hands).map((hand, index) => {
           return (
             <ButtonWrapper key={index}>
-              <ButtonBox onClick={() => clickHandler(hand)} value={hand}>
-                {hand}
-              </ButtonBox>
+              <ButtonBox onClick={() => clickHandler(hand)}>{hand}</ButtonBox>
             </ButtonWrapper>
           );
         })
