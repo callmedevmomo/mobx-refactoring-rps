@@ -60,4 +60,13 @@ const Player = inject((stores) => ({
   gameTime: stores.rps.gameTime,
 }))(PlayerDisplayer);
 
+Player.propTypes = {
+  gameStarted: propTypes.bool,
+  playerStart: propTypes.func,
+  userChoice: propTypes.func,
+  hands: propTypes.object,
+  calculateScore: propTypes.func,
+  gameTime: propTypes.number,
+};
+
 export default Player;

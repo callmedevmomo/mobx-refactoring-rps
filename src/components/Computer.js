@@ -9,6 +9,10 @@ const Computer = ({ computerChoice }) => {
     </div>
   );
 };
+
+Computer.propTypes = {
+  computerChoice: propTypes.string,
+};
 export default inject(({ rps }) => ({
   computerChoice: rps.computerChoice,
 }))(observer(Computer));

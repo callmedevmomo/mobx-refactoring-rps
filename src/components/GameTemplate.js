@@ -80,8 +80,8 @@ const GameTemplate = ({ player, computer, score }) => {
 };
 
 GameTemplate.propTypes = {
-  player: propTypes.object.isRequired,
-  computer: propTypes.object.isRequired,
-  score: propTypes.object.isRequired,
+  player: propTypes.element.isRequired,
+  computer: propTypes.element.isRequired,
+  score: propTypes.element.isRequired,
 };
 export default GameTemplate;
