@@ -49,7 +49,6 @@ const Score = ({ allGameFinished, currentRound, gameScore }) => {
     </div>
   );
 };
-
 Score.propTypes = {
   allGameFinished: propTypes.bool.isRequired,
   currentRound: propTypes.array.isRequired,

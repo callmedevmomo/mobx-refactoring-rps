@@ -17,8 +17,8 @@ const TimerBox = styled.div`
   font-weight: bold;
 `;
 
-const Counter = ({ gameTime, gameStrated }) => {
-  return gameStrated ? <TimerBox>{gameTime}</TimerBox> : <></>;
+const Counter = ({ gameTime, gameStarted }) => {
+  return gameStarted ? <TimerBox>{gameTime}</TimerBox> : <></>;
 };
 
 Counter.propTypes = {
